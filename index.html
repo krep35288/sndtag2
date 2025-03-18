@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Стили для фейковой ошибки */
+        body {
+            margin: 0;
+            height: 100vh;
+            background: #0f0f0f;
+            color: #ff4444;
+            font-family: Arial;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        #errorMsg {
+            font-size: 2em;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 0 0 10px #ff0000;
+        }
+
+        #btn {
+            padding: 15px 40px;
+            background: #2962ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        /* Стили для миньона */
+        #minion {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <!-- Экран ошибки -->
+    <div id="errorMsg"></div>
+    <button id="btn">ПОЛУЧИТЬ ДОЗУ СПЕРМЫ</button>
+
+    <!-- Скрытые элементы -->
+    <img id="minion" src="https://i.pinimg.com/736x/76/47/fa/7647fa06e089746f00e60101a63e3bf2.jpg">
+    <audio id="music" src="https://api.hostize.com/files/nLnUKervu2/download/file.mp3" loop></audio>
+
+    <script>
+        // Получаем элементы
+        const errorMsg = document.getElementById('errorMsg');
+        const btn = document.getElementById('btn');
+        const minion = document.getElementById('minion');
+        const music = document.getElementById('music');
+
+        // Функция активации
+        const activate = () => {
+            // 1. Скрываем интерфейс ошибки
+            errorMsg.style.display = 'none';
+            btn.style.display = 'none';
+            
+            // 2. Показываем миньона
+            minion.style.display = 'block';
+            
+            // 3. Запускаем музыку
+            music.play().catch(() => {
+                // Если браузер блокирует автовоспроизведение:
+                minion.style.cursor = 'pointer';
+                minion.onclick = () => music.play();
+            });
+        };
+
+        // Вешаем обработчики на ВСЁ
+        document.body.onclick = activate;
+        btn.onclick = activate;
+    </script>
+</body>
+</html>
